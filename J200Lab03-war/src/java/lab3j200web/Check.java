@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package lab3j200web;
 
 import java.io.IOException;
@@ -31,12 +26,13 @@ public class Check extends HttpServlet {
         if (request.getParameter("getmsg") != null) {
             //запрос сообщения
             try (PrintWriter out = response.getWriter()) {
-          
+                
                 String login = request.getParameter("login");
                 String message = registrator.getMessage(login);
-                String psw = request.getParameter("psw");   
-                request.setAttribute("message", message);
+                //String psw = request.getParameter("psw");   
+
                 request.setAttribute("loginName", login);
+                request.setAttribute("message", message);
 
                 out.println("<!DOCTYPE html>");
                 out.println("<html>");
@@ -45,11 +41,11 @@ public class Check extends HttpServlet {
                 out.println("</head>");
                 out.println("<body>");
  
-                out.println("<h1>Получено сообщение " + message + "</h1>");
+                out.println("<h1>" + message + "</h1>");
                 out.println("</body>");
                 out.println("</html>");
 
-            //request.getRequestDispatcher("index.jsp").forward(request, response);
+            request.getRequestDispatcher("index.jsp").forward(request, response);
             }
         } else {
 
@@ -60,7 +56,7 @@ public class Check extends HttpServlet {
 
             request.setAttribute("registered", registered ? "t" : "f");
             request.setAttribute("loginName", login);
-            
+
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
     }

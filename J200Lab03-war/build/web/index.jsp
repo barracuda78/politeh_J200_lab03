@@ -26,20 +26,12 @@
     <body>
         <h1>Registration form</h1>
         <img src="img/logo.jpg"/>
-        <%
-            String registered = (String) request.getAttribute("registered");
-            String loginName = (String) request.getAttribute("loginName");
-            String message = (String) request.getAttribute("message");
-        %>
-
             <form name="login" action="Check" method="POST">
                     <table border="1" width="500" cellspacing="3">
                         <tbody>
                             <tr>
                                 <td>Enter login:</td>
-                                <td>
-                                    <input type="text" name="login" value="" />
-                                </td>
+                                <td><input type="text" name="login" value="" /></td>
                                 <td><input type="submit" value="Register" name="register" /></td>
                             </tr>
                             <tr>
@@ -51,30 +43,27 @@
                     </table>
             </form>
         
-        <%
-            registered = (String) request.getAttribute("registered");
-            loginName = (String) request.getAttribute("loginName");
-            message = (String) request.getAttribute("message");
-        %>
+            <%
+            String registered = (String) request.getAttribute("registered");
+            //String loginName = (String) request.getAttribute("loginName");
+            String loginName = request.getParameter("login");
+            //String getmsg = request.getParameter("getmsg");
+            String message = (String) request.getAttribute("message");
+            %>
             
-        <%
-            if (message != null && "t".equals(registered)) {
-        %>
-                <h2> Вам сообщение:  <%= message%></h2>
-        <%
+            <%
+            if (request.getParameter("getmsg") != null ) { //&& "t".equals(registered)
+                %>
+                    <h2> Вам сообщение:  <%= message%></h2>
+                <%
             }
-            if (message != null && "f".equals(registered)) {
-        %>
-                <h2> Вы запрашиваете сообщение больше 3 раз. Мы вас разлогинили.</h2>
-        <%
-            } 
-            else {
+             else {
                 if ("t".equals(registered)) {
-        %> 
+                %> 
                 <h2> Приветствуем, пользователь  <%= loginName%> ! </h2>
-        <%
+                <%
                 }
-        %>  
+                %>  
  
                 <%    
                     if("t".equals(registered)){
